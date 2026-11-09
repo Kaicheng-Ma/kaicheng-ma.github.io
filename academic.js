@@ -11,6 +11,8 @@ function updateReadingPosition() {
     if (section.getBoundingClientRect().top <= threshold) current = section;
   }
   if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = sections.at(-1);
+  // Highlight the heading and existing navigation from the same reading position.
+  sections.forEach(section => section.classList.toggle('is-reading', section === current));
   sectionLinks.forEach(link => {
     if (link.hash === '#' + current.id) link.setAttribute('aria-current', 'location');
     else link.removeAttribute('aria-current');

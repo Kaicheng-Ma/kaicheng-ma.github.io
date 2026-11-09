@@ -1,0 +1,138 @@
+/* The navigation stays within reach as the reader moves through each page. */
+html {
+  scroll-padding-top: var(--reading-offset, 135px);
+}
+
+.review-bar.academic-review {
+  position: static;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  transition: box-shadow 240ms ease, background-color 240ms ease;
+}
+
+.site-header.is-docked {
+  background: color-mix(in srgb, var(--paper) 93%, transparent);
+  box-shadow: 0 14px 24px -21px var(--ink);
+  backdrop-filter: blur(14px);
+}
+
+.reading-rail,
+.project-grid aside {
+  top: var(--reading-offset, 135px);
+}
+
+/* The light moves as the introduction scrolls out of view; the text stays still. */
+.introduction,
+.project-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.introduction::before,
+.project-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at var(--hero-light-x, 86%) var(--hero-light-y, 18%), var(--mint-bg), transparent 58%);
+  opacity: .62;
+}
+
+.project-hero::before {
+  opacity: .42;
+}
+
+.project-grid aside nav a {
+  padding: 6px 9px;
+  border-inline-start: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.project-grid aside nav a:hover,
+.project-grid aside nav a[aria-current="location"] {
+  color: var(--accent);
+  background: var(--panel);
+  border-inline-start-color: var(--accent);
+}
+
+.content-area > section.is-reading > .section-heading .section-number {
+  border-color: var(--accent-rule);
+  background: var(--tint);
+}
+
+#project-content section[id] > h2 {
+  position: relative;
+}
+
+#project-content section[id] > h2::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 2px;
+  margin-top: 9px;
+  border-radius: 2px;
+  background: var(--accent-rule);
+  transform: scaleX(.3);
+  transform-origin: left;
+  transition: transform 260ms ease;
+}
+
+#project-content section.is-reading > h2::after {
+  transform: scaleX(1);
+}
+
+/* Action feedback is shared by mouse, touch and keyboard controls. */
+.project-row:has(.project-card-link:hover) .project-click-hint,
+.project-row:has(.project-card-link:focus-visible) .project-click-hint {
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+.study-details summary:focus-visible {
+  outline: 2px solid var(--warm);
+  outline-offset: -4px;
+}
+
+.study-details summary:active {
+  background: var(--mint-bg);
+}
+
+.image-explorer[open] {
+  animation: viewer-enter 200ms ease-out;
+}
+
+@keyframes viewer-enter {
+  from { opacity: .55; transform: translateY(7px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 800px) {
+  .site-header {
+    row-gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .project-grid aside nav a,
+  #project-content section[id] > h2::after {
+    transition: none;
+  }
+
+  .image-explorer[open] {
+    animation: none;
+  }
+}
+
+@media print {
+  .site-header {
+    position: static;
+  }
+}
