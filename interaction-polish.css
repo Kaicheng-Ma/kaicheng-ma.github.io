@@ -1,0 +1,47 @@
+/* Gentle feedback uses the existing palette and keeps the academic grid intact. */
+::selection{background:var(--mint-bg);color:var(--ink)}
+:focus-visible{outline:2px solid var(--warm);outline-offset:5px}
+/* The top reading indicator was removed at the user's request. */
+.introduction{background:radial-gradient(ellipse at 94% 15%,var(--tint),transparent 65%)}
+.identity-slogan{padding-left:16px;border-left:3px solid var(--accent-rule)}
+.approach{counter-reset:step}
+.approach>span:not(.approach-label){display:inline-flex;align-items:center;gap:7px}
+.approach>span:not(.approach-label)::before{counter-increment:step;content:counter(step,decimal-leading-zero);display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--edge);border-radius:50%;font-size:.65rem;color:var(--accent);background:var(--panel)}
+.project-row{border-radius:8px;transition:background .28s ease}
+.project-row:focus-within{background:linear-gradient(90deg,transparent,var(--tint))}
+.project-thumbnail a{display:block;border-radius:7px;overflow:hidden;box-shadow:0 2px 8px #16365312;transition:box-shadow .3s ease}
+.study-details summary{cursor:pointer}
+.study-details summary span{color:var(--accent);transition:background .25s,border-color .25s,box-shadow .25s}
+.study-details[open] summary span{background:var(--accent);border-color:var(--accent);color:var(--paper);box-shadow:0 0 0 4px var(--mint-bg)}
+.overview-panels>div{box-shadow:0 2px 7px #16365308}
+.github-link{transition:background .2s,border-color .2s,box-shadow .2s}
+.contact-slot{border-top:2px solid var(--accent-rule);box-shadow:0 4px 18px #16365308}
+.contact-slot:focus-within{border-color:var(--accent)}
+@media(hover:hover) and (pointer:fine){.project-row:hover{background:linear-gradient(90deg,transparent,var(--tint))}.project-thumbnail a:hover{box-shadow:0 8px 22px #16365321}.study-details summary:hover span{border-color:var(--accent);box-shadow:0 0 0 4px var(--mint-bg)}.github-link:hover{box-shadow:0 3px 10px #23786b1a}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* A semantic stretched title link makes the card clickable; disclosures and repository links stay above it. */
+.project-card-link::after{content:"";position:absolute;inset:0;z-index:1;border-radius:8px}
+.project-card-link:focus-visible::after{outline:2px solid var(--warm);outline-offset:4px}
+.project-visible-resources{grid-column:2;position:relative;z-index:2;justify-self:start;margin:8px 0}
+.project-row .study-details{position:relative;z-index:2}
+.project-thumbnail a{position:relative;z-index:2}
+.face-cover img{aspect-ratio:1/1!important;object-fit:cover;object-position:12% center;width:100%;height:auto!important}
+.bio-highlight{font-weight:650;text-decoration:underline;text-decoration-color:var(--accent-rule);text-decoration-thickness:3px;text-underline-offset:4px;color:var(--accent)}
+.warm-highlight{text-decoration-color:var(--warm);color:var(--warm)}
+.approach i{color:var(--muted)}
+@media(hover:hover) and (pointer:fine){.project-row:hover{box-shadow:0 5px 22px #1636530a;background:radial-gradient(circle at var(--pointer-x,50%) var(--pointer-y,50%),var(--tint),transparent 75%)}.project-row{transition:box-shadow .25s,background .25s}}
+@media(max-width:760px){.project-visible-resources{grid-column:1/-1}}
+/* Keep the portrait region prominent while leaving the supplied tracking screenshot untouched. */
+.face-cover a{aspect-ratio:1;overflow:hidden}.face-cover a img{height:100%!important;object-position:12% center;transform:scale(1.2)}.face-cover a:hover img{transform:scale(1.23)}
+
+/* Visually separate the native disclosure from the clickable project surface. */
+.project-click-hint{position:absolute;top:10px;right:12px;font-size:.7rem;font-weight:500;letter-spacing:.02em;color:var(--accent);pointer-events:none}
+.project-row .project-body{padding-top:22px}
+.project-row .study-details{margin-top:18px;padding:0;border:1px solid var(--edge);border-radius:7px;background:var(--paper);overflow:hidden}
+.project-row .study-details summary{margin:0;padding:13px 15px;min-height:50px;background:var(--panel);border-radius:6px;color:var(--accent);font-weight:600}
+.project-row .study-details summary:hover{background:var(--mint-bg)}
+.project-row .study-details[open] summary{border-bottom:1px solid var(--line);border-radius:6px 6px 0 0}
+.project-row .study-details .overview-panels{padding:15px}
+.project-row .study-details .project-resource-links:empty{display:none}
+@media(max-width:760px){.project-click-hint{top:8px;right:4px}.project-row .project-body{padding-top:24px}}
