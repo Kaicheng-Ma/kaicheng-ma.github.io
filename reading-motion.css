@@ -136,3 +136,128 @@ html {
     position: static;
   }
 }
+
+/* Share a content measure and gutter across the homepage and project pages. */
+body {
+  --page-gutter: clamp(20px, 5vw, 82px);
+  --page-width: 1340px;
+  overflow-x: clip;
+  background: var(--paper);
+}
+
+.site,
+.project-site {
+  width: min(calc(100% - 2 * var(--page-gutter)), var(--page-width));
+  max-width: none;
+  padding-inline: 0;
+}
+
+/* Extend surfaces to the viewport edges while keeping the text grid centered. */
+.site-header {
+  isolation: isolate;
+  border-bottom: 0;
+}
+
+.site-header,
+.site-header.is-docked {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline: calc(50% - 50vw);
+  z-index: -1;
+  pointer-events: none;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header.is-docked::before {
+  background: color-mix(in srgb, var(--paper) 93%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 28px -23px var(--ink);
+}
+
+body[data-palette] .introduction {
+  background: none;
+}
+
+.project-hero {
+  max-width: none;
+}
+
+.project-hero h1 {
+  max-width: 25ch;
+}
+
+.project-hero .project-lead {
+  max-width: 64ch;
+}
+
+.introduction::before,
+.project-hero::before {
+  inset-inline: calc(50% - 50vw);
+  opacity: 1;
+  background:
+    radial-gradient(ellipse at var(--hero-light-x, 86%) var(--hero-light-y, 18%), var(--mint-bg), transparent 56%),
+    radial-gradient(ellipse at 3% 58%, var(--cool-bg), transparent 48%),
+    radial-gradient(ellipse at 88% 83%, var(--warm-bg), transparent 36%),
+    var(--paper);
+  mask-image: linear-gradient(#000 0%, #000 54%, transparent 100%);
+}
+
+.introduction::after,
+.project-hero::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline: calc(50% - 50vw);
+  z-index: -1;
+  pointer-events: none;
+  background: url("assets/background-contours.svg") right top / min(55vw, 850px) auto no-repeat;
+  mask-image: linear-gradient(to left, #000 0%, #000 18%, transparent 63%), linear-gradient(#000 46%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* Keep long research paragraphs readable on ultrawide displays. */
+.project-grid #project-content section > p {
+  max-width: 78ch;
+}
+
+/* Small chapter accents bring the same palette into the reading area. */
+.content-area > section > .section-heading,
+.project-grid #project-content section[id] > h2 {
+  background-image: linear-gradient(90deg, color-mix(in srgb, var(--cool-bg) 60%, transparent), transparent 72%);
+}
+
+.content-area > section > .section-heading {
+  padding-inline: 13px;
+  border-radius: 0 0 9px 9px;
+}
+
+.project-grid #project-content section[id] > h2 {
+  padding: 7px 12px;
+  border-radius: 6px;
+}
+
+@media (max-width: 800px) {
+  .introduction::after,
+  .project-hero::after {
+    background-size: min(88vw, 480px) auto;
+    opacity: .72;
+  }
+}
+
+@media print {
+  body { overflow: visible; }
+  .site, .project-site { width: 100%; }
+  .site-header::before,
+  .introduction::before,
+  .introduction::after,
+  .project-hero::before,
+  .project-hero::after { display: none; }
+}

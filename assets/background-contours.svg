@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 710 500" fill="none">
+  <!-- Quiet contour paths suggest movement from the edge of the page. -->
+  <g stroke-linecap="round">
+    <path d="M723 31C610 16 567 48 498 101S415 200 341 212 215 173 135 200 45 255-12 260" stroke="#85B5A0" stroke-opacity=".44"/>
+    <path d="M727 56C630 38 582 67 520 115S443 220 355 235 232 198 156 226 69 275-12 289" stroke="#85B5A0" stroke-opacity=".36"/>
+    <path d="M733 86C651 64 598 88 541 135S466 243 374 260 250 224 181 250 82 300-8 313" stroke="#85B5A0" stroke-opacity=".27"/>
+    <path d="M732 125C664 97 622 115 567 158S491 269 399 287 277 255 203 279 98 326 2 339" stroke="#87A8BD" stroke-opacity=".28"/>
+    <path d="M727 172C677 142 639 151 592 190S519 296 430 315 300 285 234 306 122 357 27 365" stroke="#87A8BD" stroke-opacity=".21"/>
+    <path d="M721 217C679 187 651 194 614 225S548 326 465 346 334 320 275 335 156 381 60 392" stroke="#A66327" stroke-opacity=".16"/>
+  </g>
+</svg>
